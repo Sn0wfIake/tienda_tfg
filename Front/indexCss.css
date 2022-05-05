@@ -29,5 +29,9 @@ footer.page-footer {
   margin-top: 32px;
 }
 
-.imgdiv { display: block; width: 100% !important; height: auto !important; }
+@media (max-width: 688px) {
+  .carousel-item img {
+      max-height: 146px;
+  }
+}
 
