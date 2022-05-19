@@ -1,8 +1,9 @@
-<html>
-
+ <html lang="es">
+<meta charset="UTF-8">
 <head>
-  <script type="text/javascript" src="./indexJS.js"></script>
-  <link rel="stylesheet" type="text/css" href="./indexCss.css" media="screen" />
+  <script src="{{ url_for('static', filename="js/indexJS.js") }}"></script>
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/indexCss.css') }}">
+
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -158,17 +159,17 @@
               <div class="carousel-inner" role="listbox">
                 <!--First slide-->
                 <div class="carousel-item active">
-                  <img src="./imagenes/generico/as.png" alt="First slide">
+                  <img src="https://thumbs.dreamstime.com/b/ca%C3%ADda-de-la-ropa-en-el-estante-de-la-ropa-90991990.jpg" alt="First slide" width="1321" height="583">
                   <div class="carousel-caption">
                     
-                    <h4>New collection</h4>
+                    <h4>Promocion!</h4>
                     <br>
                   </div>
                 </div>
              
                 <!--Second slide-->
                 <div class="carousel-item">
-                  <img src="http://mdbootstrap.com/img//Photos/Slides/img%20(109).jpg" alt="Second slide">
+                  <img src="http://mdbootstrap.com/img//Photos/Slides/img%20(109).jpg" alt="Second slide" width="1321" height="583">
                   <div class="carousel-caption">
                     <h4>OFERTA</h4>
                     <br>
@@ -177,7 +178,7 @@
                 <!--/Second slide-->
                 <!--Third slide-->
                 <div class="carousel-item">
-                  <img src="http://mdbootstrap.com/img//Photos/Slides/img%20(36).jpg" alt="Third slide">
+                  <img src="http://mdbootstrap.com/img//Photos/Slides/img%20(36).jpg" alt="Third slide" width="1321" height="583">
                   <div class="carousel-caption">
                     <h4>OFERTA</h4>
                     <br>
@@ -212,14 +213,14 @@
 
               <!--Card image-->
               <div class="view overlay hm-white-slight">
-                <img src="./imagenes/nenes/nenesportada.gif" class="img-fluid" alt="Error al cargar la imagen">
+                <img src="https://www.lavanguardia.com/files/og_thumbnail/uploads/2018/08/10/5fa4322e739b0.jpeg" width="322" height="203" class="img-fluid" alt="Error al cargar la imagen">
                 <a href="#">
                   <div class="mask"></div>
                 </a>
               </div>
 
               <div class="card-block">
-                <a href="./tienda/nenes.html" class="btn btn-block">
+                <a href="/nenes" class="btn btn-block">
                   <h4 class="card-title">Niños</h4>
 
                   <p class="card-text">Ropita para niños.</p>
@@ -240,17 +241,17 @@
 
               <!--Card image-->
               <div class="view overlay hm-white-slight">
-                <img src="./imagenes/nenes/nenesportada.gif" class="img-fluid" alt="Error al cargar la imagen">
+                <img src="https://vader.news/__export/1619057905977/sites/gadgets/img/2021/04/21/the_office.jpg_2011917973.jpg" width="322" height="203" class="img-fluid" alt="Error al cargar la imagen" >
                 <a href="#">
                   <div class="mask"></div>
                 </a>
               </div>
 
               <div class="card-block">
-                <a href="./tienda/nenes.html" class="btn btn-block">
-                  <h4 class="card-title">Niños</h4>
+                <a href="/hombres" class="btn btn-block">
+                  <h4 class="card-title">Hombres</h4>
 
-                  <p class="card-text">Ropita para niños.</p>
+                  <p class="card-text">Ropa para hombres.</p>
                   <strong>Ver la ropa </strong>
                 </a>
               </div>
@@ -268,17 +269,17 @@
 
               <!--Card image-->
               <div class="view overlay hm-white-slight">
-                <img src="./imagenes/nenes/nenesportada.gif" class="img-fluid" alt="Error al cargar la imagen">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDkohr2ZA-eCptXq0KzySGiKjB490Q6ExKTQ&usqp=CAU" width="322" height="203" class="img-fluid" alt="Error al cargar la imagen">
                 <a href="#">
                   <div class="mask"></div>
                 </a>
               </div>
 
               <div class="card-block">
-                <a href="./tienda/nenes.html" class="btn btn-block">
-                  <h4 class="card-title">Niños</h4>
+                <a href="/mujeres" class="btn btn-block">
+                  <h4 class="card-title">Mujeres</h4>
 
-                  <p class="card-text">Ropita para niños.</p>
+                  <p class="card-text">Ropa para mujeres.</p>
                   <strong>Ver la ropa </strong>
                 </a>
               </div>
