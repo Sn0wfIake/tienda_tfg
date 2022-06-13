@@ -1,8 +1,10 @@
-from flask import Flask, request, render_template, url_for
+import json
+
+from flask import Flask, request, render_template, url_for, jsonify
 from werkzeug.utils import redirect
 
 from bck.objetos import *
-
+from bck.objetos.conector import crudcatalogo, database, crudusuarios
 
 app = Flask(__name__, template_folder='template')
 
@@ -23,7 +25,7 @@ def hombres():
 def login():
    if request.method == 'POST':
 
-      return redirect(url_for('success',catalogo = crudcatalogo.listarcatalogo()))
+      return redirect(url_for('success', 'mujeres.html'))
    else:
       user = request.args.get('nm')
       return redirect(url_for('success',name = user))
@@ -35,10 +37,19 @@ def validate():
         return redirect(url_for("success"))
     return redirect(url_for("login"))
 
+@app.route('/listacatalogo', methods = ['GET'])
+def catalogoentero():
+    db = database()
+    st = crudcatalogo()
+    listausu = st.listarcatalogo()
+
+    response = json.dumps(listausu)
+    return response
+
 
 @app.route('/success')
 def success():
-    return "logged in successfully"
+    return render_template("mujeres.html")
 
 if __name__ == '__main__':
     app.run()

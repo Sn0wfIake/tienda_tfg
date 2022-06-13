@@ -1,8 +1,11 @@
+import MySQLdb
 import mysql.connector
+from sqlalchemy import sql
 
 
 class database:
     my_db = my_cursor = None
+
 
     def __init__(self):
         global my_db, my_cursor
@@ -12,7 +15,7 @@ class database:
             password="",
             database="tienda_online"
         )
-        my_cursor = my_db.cursor()
+        my_cursor = my_db.cursor(dictionary=True)
 
 
 class crudusuarios(database):
@@ -132,16 +135,21 @@ class crudusuarios(database):
 
 
 class crudcatalogo(database):
-    def listarcatalogo(self, mode='DESC'):
+    def listarcatalogo(self, mode='DESC', ):
         sql = "SELECT * FROM `catalogo`".format(mode)
+
 
         try:
             my_cursor.execute(sql)
-            listacatalogo = my_cursor.fetchall()
+            cosas = my_cursor.fetchall()
+
+
+
+
         except Exception as e:
             return e
 
-        return listacatalogo
+        return cosas
 
     def buscaid(self, id_prenda, mode='DESC'):
         sql = "SELECT * FROM catalogo WHERE id_usuario = {}".format(id_prenda)

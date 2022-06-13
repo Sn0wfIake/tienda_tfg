@@ -7,6 +7,12 @@
     font-family: Calluna, Arial, sans-serif;
     min-height: 1000px;
   }
+  img {
+    float: left;
+    width:  100px;
+    height: 100px;
+    object-fit: cover;
+}
   .columns_2{
     -webkit-column-count:2;
     -moz-column-count:2;
@@ -50,7 +56,7 @@
   }
   
   div#columns figure img {
-      width: 100%; height: auto;
+      width: 200px; height: 200px;
       border-bottom: 1px solid #ccc;
       padding-bottom: 15px;
       margin-bottom: 5px;
@@ -61,17 +67,17 @@
       color: #444;
     line-height: 1.5;
   }
-  
-  div#columns small { 
+
+  div#columns small {
     font-size: 1rem;
-    float: right; 
+    float: right;
     text-transform: uppercase;
     color: #aaa;
-  } 
-  
-  div#columns small a { 
-    color: #666; 
-    text-decoration: none; 
+  }
+
+  div#columns small a {
+    color: #666;
+    text-decoration: none;
     transition: .4s color;
   }
   div#columns figure:hover{
