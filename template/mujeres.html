@@ -3,8 +3,8 @@
 
   <head>
   <script src="{{ url_for('static', filename="js/indexJS.js") }}"></script>
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/escaparate.css') }}">
-  <link rel="stylesheet" type="text/css" href="./indexCss.css" media="screen" />
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/escaparate.css') }}">
+ 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -20,22 +20,64 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
 <script>
-let catalogo = [];
 
-let url = '/listacatalogo';
+let catalogo;
 
-fetch('http://127.0.0.1:5000/listacatalogo')  
+
+
+ async function getUsers() {
+    let url = 'http://127.0.0.1:5000/listacatalogom';
+    try {
+        let res = await fetch(url);
+        return await res.json();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function renderUsers() {
+    let users = await getUsers();
+    catalogo = users;
+    let html = '';
+    users.forEach(user => {
+        let htmlSegment = `<figure>
+        <img src="${user.foto}">  <figcaption id=\"caption\"></figcaption>   <span id=\"estilo\" class=\"estilo\">"${user.estilo}"</span><a id=\"anadecarro\" class=\"button\" href=\"#\">${user.precio}€</a></figure>
+      </figure>  `;
+
+        html += htmlSegment;
+    });
+
+    let container = document.querySelector('.columns_5');
+    container.innerHTML = html;
+}
+
+renderUsers();
+
+console.log(catalogo);
+
+
+
+ /*fetch('http://127.0.0.1:5000/listacatalogo')  
   .then(res => res.json())  
   .then((out) => {  
     var traduce = JSON.stringify(out);
-    var variable = JSON.parse(traduce);
-    catalogo.push(variable);
-  
+    catalogo = JSON.parse(traduce);
+    
+
+    return catalogo;
   })  
   .catch(err => {  
     throw err  
   });
-  console.log(catalogo);
+ console.log(catalogo);
+
+ for(i in catalogo){
+	let current = catalogo[i];
+	console.log(current.foto);
+	console.log(current.estilo);
+	
+}*/
+
 //catalogo.forEach(creaelementos(getKeyByValue(catalogo, "foto"), getKeyByValue(catalogo, "precio"), getKeyByValue(catalogo, "estilo")));
 //console.log(getKeyByValue(catalogo[0][0],"foto"));
 
@@ -70,13 +112,10 @@ $("figure").append("<img src="+imagen+">  <figcaption id=\"caption\"></figcaptio
       <div class="collapse navbar-collapse" id="navbarNav1">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a href="../index.html" class="nav-link">Inicio</a>
+            <a href="/" class="nav-link">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link">Novedades</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link">Ver todo</a>
+            <a href="/catalogo" class="nav-link">Ver todo</a>
           </li>
 
         </ul>

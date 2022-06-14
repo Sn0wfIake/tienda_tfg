@@ -135,8 +135,54 @@ class crudusuarios(database):
 
 
 class crudcatalogo(database):
+    def listarcatalogou(self, mode='DESC', ):
+        sql = "SELECT * FROM `catalogo` where sexo='u'".format(mode)
+
+
+        try:
+            my_cursor.execute(sql)
+            cosas = my_cursor.fetchall()
+
+
+
+
+        except Exception as e:
+            return e
+
+        return cosas
+
     def listarcatalogo(self, mode='DESC', ):
         sql = "SELECT * FROM `catalogo`".format(mode)
+
+
+        try:
+            my_cursor.execute(sql)
+            cosas = my_cursor.fetchall()
+
+
+
+
+        except Exception as e:
+            return e
+
+        return cosas
+    def listarcatalogom(self, mode='DESC', ):
+        sql = "SELECT * FROM `catalogo`  where sexo='m'".format(mode)
+
+
+        try:
+            my_cursor.execute(sql)
+            cosas = my_cursor.fetchall()
+
+
+
+
+        except Exception as e:
+            return e
+
+        return cosas
+    def listarcatalogoh(self, mode='DESC', ):
+        sql = "SELECT * FROM `catalogo`  where sexo='h'".format(mode)
 
 
         try:
