@@ -30,12 +30,12 @@ class crudusuarios(database):
 
         return listausu
 
-    def buscaid(self, id_usuario, mode='DESC'):
-        sql = "SELECT * FROM usuarios WHERE id_usuario = {}".format(id_usuario)
+    def buscaid(self,correo ,passwd, mode='DESC'):
+        sql = "SELECT * FROM usuarios WHERE correo = {}".format(correo)+" and passwd={}".format(passwd)
 
         try:
             my_cursor.execute(sql)
-            usuario = my_cursor.fetchall()
+            usuario = my_cursor.fetchone()
         except Exception as e:
             return e
 
