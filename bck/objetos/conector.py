@@ -229,15 +229,15 @@ class crudcatalogo(database):
         except Exception as e:
             return e
 
-    def update(self, id_prenda, data):
+    def update(self, id_prenda):
 
-        sql = "UPDATE catalogo SET stock = %s ,tipo_prenda = %s, estilo = %s, color = %s, precio = %s, foto = %s WHERE id_usuario = {}".format(
+        sql = "UPDATE catalogo SET stock = stock -1 WHERE id_prenda = {}".format(
             id_prenda)
 
-        val = (data[0], data[1], data[2], data[3], data[4])
+
 
         try:
-            my_cursor.execute(sql, val)
+            my_cursor.execute(sql)
             my_db.commit()
         except Exception as e:
             return e

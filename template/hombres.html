@@ -22,12 +22,16 @@
 
   <style>
     .show-cart li {
-      display: flex;
-    }
-
-    .card {
-      margin-bottom: 20px;
-    }
+  display: flex;
+}
+.card {
+  margin-bottom: 20px;
+}
+.img-fluid {
+  width: 160px;
+  height: 160px;
+  align-self: center;
+}
   </style>
 </head>
 
@@ -67,7 +71,7 @@
         <!-- Precio total -->
         <p class="text-right">Total: <span id="total"></span>&euro;</p>
         <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
-        <button id="boton-vaciar" class="btn btn-danger">Comprar todo</button>
+        <button onclick="enviarDatosBackend ()" id="boton-vaciar" class="btn btn-danger">Comprar todo</button>
       </aside>
     </div>
   </div>
@@ -104,7 +108,7 @@ const jsonDibujo = (function () {
     return result;
   })();
   const baseDeDatosdibujar = jsonDibujo;
-
+ 
   const baseDeDatos = jsonData;
   document.addEventListener('DOMContentLoaded', () => {
 
@@ -145,7 +149,7 @@ const jsonDibujo = (function () {
         // Precio
         const miNodoPrecio = document.createElement('p');
         miNodoPrecio.classList.add('card-text');
-        miNodoPrecio.textContent = `${info.precio}${divisa}`;
+        miNodoPrecio.textContent = `${info.precio}${divisa} - Stock:${info.stock}`;
         // Boton
         const miNodoBoton = document.createElement('button');
         miNodoBoton.classList.add('btn', 'btn-primary');
@@ -267,7 +271,7 @@ const jsonDibujo = (function () {
       if (miLocalStorage.getItem('carrito') !== null) {
         // Carga la información
         carrito = JSON.parse(miLocalStorage.getItem('carrito'));
-        console.log(carrito);
+
       }
     }
 
@@ -279,6 +283,29 @@ const jsonDibujo = (function () {
     renderizarProductos();
     renderizarCarrito();
   });
+
+  function enviarDatosBackend() {
+    const miLocalStorage = window.localStorage;
+
+    if (miLocalStorage.getItem('carrito') !== null) {
+
+      const enviarJson = JSON.parse(miLocalStorage.getItem('carrito'));
+      console.log("json: " + enviarJson);
+
+      $.ajax({
+
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(enviarJson),
+        url: 'http://127.0.0.1:5000/test',
+        success: function (e) {
+          console.log(e);
+          localStorage.clear();
+          window.location = "http://127.0.0.1:5000/exito";
+    }});
+
+    }
+  } 
 </script>
 
 </html>

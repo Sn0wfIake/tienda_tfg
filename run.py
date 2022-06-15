@@ -1,15 +1,13 @@
 import json
+import re
 from typing import re
 
 import MySQLdb
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, url_for, session
 from flask_mysqldb import MySQL
-
-import re
-
 from werkzeug.utils import redirect
 
-from bck.objetos.conector import crudcatalogo, crudusuarios
+from bck.objetos.conector import crudcatalogo
 
 app = Flask(__name__, template_folder='template')
 app.secret_key = 'super secret key'
@@ -37,9 +35,11 @@ def nenes():
         return redirect("/nenelogin")
     return render_template("nenes.html")
 
+
 @app.route('/nenelogin')
 def nenelogin():
     return render_template("nenelogin.html")
+
 
 @app.route('/hombres')
 def hombres():
@@ -171,6 +171,26 @@ def register():
     elif request.method == 'POST':
         msg = 'Please fill out the form !'
     return render_template('register.html', msg=msg)
+
+
+@app.route('/test', methods=['GET', 'POST'])
+def test():
+    salida = request.get_json()
+    if salida is not None:
+        actualizacatalogo(salida)
+        return redirect(url_for('exito'))
+
+
+@app.route('/exito')
+def exito():
+    return render_template("exito.html")
+
+
+def actualizacatalogo(salida):
+    st = crudcatalogo()
+    for x in salida:
+        st.update(x)
+        print("vuelta " + x)
 
 
 if __name__ == '__main__':
