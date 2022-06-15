@@ -138,6 +138,12 @@ def login():
     return render_template('index.html', msg=msg)
 
 
+@app.route('/registrohecho', methods=['GET', 'POST'])
+def registrofin():
+
+    return render_template('indexregistro.html')
+
+
 @app.route('/logout')
 def logout():
     session.pop('loggedin', None)
@@ -149,28 +155,25 @@ def logout():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     msg = ''
-    if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form:
-        username = request.form['username']
-        password = request.form['password']
-        email = request.form['email']
+    if request.method == 'POST' and 'correo' in request.form and 'apellido' in request.form and 'clave' in request.form and 'nombre' in request.form:
+        correo = request.form['correo']
+        passwd = request.form['clave']
+        apellido = request.form['apellido']
+        nombre = request.form['nombre']
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cursor.execute('SELECT * FROM accounts WHERE username = % s', (username,))
+        cursor.execute('SELECT * FROM usuarios WHERE correo = % s', (correo,))
         account = cursor.fetchone()
         if account:
-            msg = 'Account already exists !'
-        elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
-            msg = 'Invalid email address !'
-        elif not re.match(r'[A-Za-z0-9]+', username):
-            msg = 'Username must contain only characters and numbers !'
-        elif not username or not password or not email:
-            msg = 'Please fill out the form !'
+            msg = 'Ya existe!'
+
         else:
-            cursor.execute('INSERT INTO accounts VALUES (NULL, % s, % s, % s)', (username, password, email,))
+            cursor.execute('INSERT INTO usuarios (nombre, apellidos, correo, passwd) VALUES (%s , %s, %s , %s)',
+                           (nombre, apellido, correo, passwd,))
             mysql.connection.commit()
-            msg = 'You have successfully registered !'
+            msg = 'Registrado correctamente!'
     elif request.method == 'POST':
         msg = 'Please fill out the form !'
-    return render_template('register.html', msg=msg)
+    return redirect(url_for('registrofin'))
 
 
 @app.route('/test', methods=['GET', 'POST'])

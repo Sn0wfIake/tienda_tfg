@@ -101,7 +101,7 @@ class crudusuarios(database):
 
     def insertausu(self, data):
 
-        sql = "INSERT INTO usuarios (nombre, apellidos, correo, passwd, preferencias) VALUES (%s , %s, %s , %s, %s)"
+        sql = "INSERT INTO usuarios (nombre, apellidos, correo, passwd) VALUES (%s , %s, %s , %s)"
 
         try:
             my_cursor.execute(sql, data)
