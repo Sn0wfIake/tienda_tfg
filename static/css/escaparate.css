@@ -7,11 +7,11 @@
     font-family: Calluna, Arial, sans-serif;
     min-height: 1000px;
   }
-  img {
+  .img {
     float: left;
-    width:  100px;
-    height: 100px;
-    object-fit: cover;
+    width:  250px;
+    height: 250px;
+   
 }
   .columns_2{
     -webkit-column-count:2;

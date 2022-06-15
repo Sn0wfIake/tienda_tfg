@@ -1,15 +1,13 @@
 import json
+import re
 from typing import re
 
 import MySQLdb
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, url_for, session
 from flask_mysqldb import MySQL
-
-import re
-
 from werkzeug.utils import redirect
 
-from bck.objetos.conector import crudcatalogo, crudusuarios
+from bck.objetos.conector import crudcatalogo
 
 app = Flask(__name__, template_folder='template')
 app.secret_key = 'super secret key'
@@ -24,7 +22,7 @@ mysql = MySQL(app)
 @app.route('/')
 def index():
     if not session.get("user"):
-        #Si tiene sesion te redirige a tu sesion
+        # Si tiene sesion te redirige a tu sesion
         return redirect("/login")
 
     return render_template("loginhecho.html")
@@ -32,22 +30,54 @@ def index():
 
 @app.route('/nenes')
 def nenes():
+    if not session.get("user"):
+        # Si tiene sesion te redirige a tu sesion
+        return redirect("/nenelogin")
     return render_template("nenes.html")
+
+
+@app.route('/nenelogin')
+def nenelogin():
+    return render_template("nenelogin.html")
 
 
 @app.route('/hombres')
 def hombres():
+    if not session.get("user"):
+        # Si tiene sesion te redirige a tu sesion
+        return redirect("/hombrelogin")
     return render_template("hombres.html")
+
+
+@app.route('/hombrelogin')
+def hombrelogin():
+    return render_template("hombrelogin.html")
 
 
 @app.route('/mujeres')
 def mujeres():
+    if not session.get("user"):
+        # Si tiene sesion te redirige a tu sesion
+        return redirect("/mujerlogin")
     return render_template("mujeres.html")
+
+
+@app.route('/mujerlogin')
+def mujerlogin():
+    return render_template("mujerlogin.html")
 
 
 @app.route('/catalogo')
 def catalogo():
+    if not session.get("user"):
+        # Si tiene sesion te redirige a tu sesion
+        return redirect("/cataloglogin")
     return render_template("catalogo.html")
+
+
+@app.route('/cataloglogin')
+def cataloglogin():
+    return render_template("cataloglogin.html")
 
 
 @app.route('/listacatalogoh', methods=['GET'])
@@ -141,6 +171,26 @@ def register():
     elif request.method == 'POST':
         msg = 'Please fill out the form !'
     return render_template('register.html', msg=msg)
+
+
+@app.route('/test', methods=['GET', 'POST'])
+def test():
+    salida = request.get_json()
+    if salida is not None:
+        actualizacatalogo(salida)
+        return redirect(url_for('exito'))
+
+
+@app.route('/exito')
+def exito():
+    return render_template("exito.html")
+
+
+def actualizacatalogo(salida):
+    st = crudcatalogo()
+    for x in salida:
+        st.update(x)
+        print("vuelta " + x)
 
 
 if __name__ == '__main__':
