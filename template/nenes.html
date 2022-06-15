@@ -73,7 +73,7 @@
         <!-- Precio total -->
         <p class="text-right">Total: <span id="total"></span>&euro;</p>
         <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
-        <button onclick="enviarDatosBackend ()" id="boton-vaciar" class="btn btn-danger">Comprar todo</button>
+        <button onclick="enviarDatosBackend ()" id="boton-vaciar" class="btn btn-success">Comprar todo</button>
       </aside>
     </div>
   </div>
@@ -284,6 +284,8 @@
     renderizarProductos();
     renderizarCarrito();
   });
+
+  //con esto se envia todo al bck y se recibe la respuesta
   function enviarDatosBackend() {
     const miLocalStorage = window.localStorage;
 
